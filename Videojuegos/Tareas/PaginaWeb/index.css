@@ -1,0 +1,45 @@
+
+/*Archivo css para darle formato a las partes de la pagina web, como el fondo, el color de letra, el tamaño de letra, etc. Asi se puede modificar la apariencia de la pagina web desde un solo archivo y no tener que modificar cada parte de la pagina web por separado.
+para llamar a toda una seccion escribimos tal cual el nombre de la seccion como body o head */
+body{
+    color:antiquewhite;
+    background-color: black;
+}
+
+/*Para llamar a una clase usamos el punto antes del nombre de la clase*/
+.header{
+    color: black;
+    background-color: plum;
+}
+
+.content{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: large;
+    color:antiquewhite;
+    background-color: black;
+    border-style: solid;
+    border-color: plum;
+    margin-bottom: 50px;
+}
+
+#name{
+    font-size: 20px;
+    font-weight: bold;
+    color: antiquewhite;
+}
+/*Para llamar a un id usamos el gato antes del nombre del id*/
+#mainP{
+    width: 70%;
+    text-align: center;
+}
+
+#image{
+    width: 30%;
+}
+    
+
+
+.footer{
+    color: black;
+    background-color: plum;
+}
