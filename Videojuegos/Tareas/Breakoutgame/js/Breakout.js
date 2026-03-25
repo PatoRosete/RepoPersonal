@@ -1,3 +1,10 @@
+/*
+ * BREAKOUT GAME
+ *
+ * CARLOS ROSETE
+ * 2026-03-25
+ */
+
 "use strict";
 
 const canvasWidth = 800;
@@ -230,7 +237,6 @@ class Game {
     }
 }
 
-// --- FUNCIONES DE CONTROL ---
 
 function main() {
     const canvas = document.getElementById('canvas');
