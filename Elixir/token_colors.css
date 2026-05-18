@@ -1,0 +1,89 @@
+/* token_colors.css - VS Code-style theme for the Elixir lexer */
+/*Its ugly an I'm sorry Carlos Enrique Rosete Pascual*/
+
+body {
+  background-color: #1e1e1e;
+  color: #d4d4d4;
+  font-family: "Consolas", "Menlo", "Courier New", monospace;
+  font-size: 14px;
+  margin: 0;
+  padding: 20px;
+}
+
+h1 {
+  color: #9cdcfe;
+  font-size: 14px;
+  font-weight: normal;
+  border-bottom: 1px solid #333;
+  padding-bottom: 10px;
+}
+
+pre {
+  line-height: 1.5;
+  white-space: pre;
+}
+
+/* Comments */
+.comment {
+  color: #51ff00;
+  font-style: italic;
+}
+
+/* Strings*/
+.string {
+  color: #992b00;
+}
+
+
+
+/* Numbers */
+.number {
+  color: #ff00b3;
+}
+
+/* Reserved words */
+.reserved-word {
+  color: #00e78e;
+  font-weight: bold;
+}
+
+/* Module names (Enum, IO, File...) */
+.module {
+  color: #ff4040;
+}
+
+/* Atoms (:ok, :error, :underweight) */
+.atom {
+  color: #ffffff;
+}
+
+/* Module attributes (@moduledoc) and __MODULE__ etc */
+.special {
+  color: #939300;
+  font-style: italic;
+}
+
+/* Variables */
+.variable {
+  color: #ff0000;
+}
+
+/* Function names */
+.function {
+  color: #dcdcaa;
+}
+
+/* Operators */
+.operator {
+  color: #00ffe5;
+}
+
+/* Punctuation */
+.punctuation {
+  color: #33ff00;
+}
+
+
+.text {
+  color: #8800ff;
+}
