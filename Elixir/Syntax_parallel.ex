@@ -22,61 +22,61 @@ defmodule TecLexer.Parallel do
   # All regexes are anchored at the beginning of the remaining text with \A.
   @rules [
     # Triple-quoted strings must come before regular strings so they match first
-    {"string",      ~r/\A"{3}[\s\S]*?"{3}/},
-    {"string",      ~r/\A'{3}[\s\S]*?'{3}/},
+    {"string", ~r/\A"{3}[\s\S]*?"{3}/},
+    {"string", ~r/\A'{3}[\s\S]*?'{3}/},
 
     # Single-line comment: from # until end of line
-    {"comment",     ~r/\A#.*/},
+    {"comment", ~r/\A#.*/},
 
     # Sigils: ~r/regex/, ~s"string", ~w[word list], etc.
-    {"sigil",       ~r/\A~[a-zA-Z](?:[\/\|"'\(\[\{<])(?:[^\\]|\\.)*?(?:[\/\|"'\)\]\}>])[a-zA-Z]*/},
+    {"sigil", ~r/\A~[a-zA-Z](?:[\/\|"'\(\[\{<])(?:[^\\]|\\.)*?(?:[\/\|"'\)\]\}>])[a-zA-Z]*/},
 
     # Strings with double quotes (allows escaped characters inside)
-    {"string",      ~r/\A"(?:[^"\\]|\\.)*"/},
+    {"string", ~r/\A"(?:[^"\\]|\\.)*"/},
 
     # Charlists with single quotes
-    {"string",      ~r/\A'(?:[^'\\]|\\.)*'/},
+    {"string", ~r/\A'(?:[^'\\]|\\.)*'/},
 
     # Numbers: hex, octal, binary, floats with exponent, plain floats, integers
     # Longest patterns go first so 0xFF is not confused with 0
-    {"number",      ~r/\A0x[0-9a-fA-F][0-9a-fA-F_]*/},
-    {"number",      ~r/\A0o[0-7][0-7_]*/},
-    {"number",      ~r/\A0b[01][01_]*/},
-    {"number",      ~r/\A\d[\d_]*\.\d[\d_]*[eE][+-]?\d+/},
-    {"number",      ~r/\A\d[\d_]*\.\d[\d_]*/},
-    {"number",      ~r/\A\d[\d_]*[eE][+-]?\d+/},
-    {"number",      ~r/\A\d[\d_]*/},
+    {"number", ~r/\A0x[0-9a-fA-F][0-9a-fA-F_]*/},
+    {"number", ~r/\A0o[0-7][0-7_]*/},
+    {"number", ~r/\A0b[01][01_]*/},
+    {"number", ~r/\A\d[\d_]*\.\d[\d_]*[eE][+-]?\d+/},
+    {"number", ~r/\A\d[\d_]*\.\d[\d_]*/},
+    {"number", ~r/\A\d[\d_]*[eE][+-]?\d+/},
+    {"number", ~r/\A\d[\d_]*/},
 
     # Atoms: :name or :"quoted name"
-    {"atom",        ~r/\A:[a-zA-Z_]\w*[?!]?/},
-    {"atom",        ~r/\A:"(?:[^"\\]|\\.)*"/},
+    {"atom", ~r/\A:[a-zA-Z_]\w*[?!]?/},
+    {"atom", ~r/\A:"(?:[^"\\]|\\.)*"/},
 
     # Module names: start uppercase, may chain with dots (Enum, IO, File.Stream)
-    {"module",      ~r/\A[A-Z][a-zA-Z0-9_]*(?:\.[A-Z][a-zA-Z0-9_]*)*/},
+    {"module", ~r/\A[A-Z][a-zA-Z0-9_]*(?:\.[A-Z][a-zA-Z0-9_]*)*/},
 
     # Module attributes (@doc, @spec, @moduledoc) and special forms (__MODULE__ etc.)
-    {"special",     ~r/\A@[a-zA-Z_]\w*/},
-    {"special",     ~r/\A__[A-Z_]+__/},
+    {"special", ~r/\A@[a-zA-Z_]\w*/},
+    {"special", ~r/\A__[A-Z_]+__/},
 
     # Capture operator: &String.upcase/1, &my_fun/2, &1
     # Longer patterns go first to avoid partial matches
-    {"capture",     ~r/\A&[A-Z]\w*\.[a-z_]\w*\/\d+/},
-    {"capture",     ~r/\A&[a-z_]\w*\/\d+/},
-    {"capture",     ~r/\A&\d+/},
+    {"capture", ~r/\A&[A-Z]\w*\.[a-z_]\w*\/\d+/},
+    {"capture", ~r/\A&[a-z_]\w*\/\d+/},
+    {"capture", ~r/\A&\d+/},
 
     # Ignored variables: _ or _name (used in pattern matching to discard values)
-    {"ignored",     ~r/\A_\w*/},
+    {"ignored", ~r/\A_\w*/},
 
     # Functions: an identifier immediately followed by ( -- lookahead so the
     # parenthesis is NOT consumed here; it will be matched as punctuation next
-    {"function",    ~r/\A[a-z_]\w*[?!]?(?=\()/},
+    {"function", ~r/\A[a-z_]\w*[?!]?(?=\()/},
 
     # Identifier: variables, function names, and reserved words.
     # We decide which one it really is in render_token/2.
-    {"identifier",  ~r/\A[a-zA-Z_]\w*[?!]?/},
+    {"identifier", ~r/\A[a-zA-Z_]\w*[?!]?/},
 
     # Operators (longest first so |> matches before | and >= matches before >)
-    {"operator",    ~r/\A(?:===|!==|==|!=|<=|>=|->|<-|=>|\|>|<>|\+\+|--|=~|::|\.\.|\*\*|\|\||&&|=|\+|-|\*|\/|<|>|!|&|\^|\||~)/},
+    {"operator", ~r/\A(?:===|!==|==|!=|<=|>=|->|<-|=>|\|>|<>|\+\+|--|=~|::|\.\.|\*\*|\|\||&&|=|\+|-|\*|\/|<|>|!|&|\^|\||~)/},
 
     # Punctuation: parens, brackets, braces, comma, semicolon, dot, pipe, colon
     {"punctuation", ~r/\A[\(\)\[\]\{\},%;\.\|:]/}
