@@ -1,89 +1,82 @@
-/* token_colors.css - VS Code-style theme for the Elixir lexer */
-/*Its ugly an I'm sorry Carlos Enrique Rosete Pascual*/
+/* token_colors.css
+ * Made it with AI
+ * Carlos Enrique Rosete Pascual 11/06/2024
+ */
+
+/* ── Page reset & base ──────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
   background-color: #1e1e1e;
   color: #d4d4d4;
-  font-family: "Consolas", "Menlo", "Courier New", monospace;
+  font-family: "Cascadia Code", "Fira Code", "Consolas", "Menlo", monospace;
   font-size: 14px;
-  margin: 0;
-  padding: 20px;
+  line-height: 1.6;
+  padding: 2rem;
 }
 
-h1 {
-  color: #9cdcfe;
-  font-size: 14px;
-  font-weight: normal;
+h1.filename {
+  color: #569cd6;
+  font-size: 1rem;
+  font-weight: 400;
+  margin-bottom: 1rem;
+  letter-spacing: 0.04em;
   border-bottom: 1px solid #333;
-  padding-bottom: 10px;
+  padding-bottom: 0.5rem;
 }
 
-pre {
-  line-height: 1.5;
-  white-space: pre;
+pre.code-block {
+  background-color: #252526;
+  border: 1px solid #333;
+  border-radius: 6px;
+  padding: 1.25rem 1.5rem;
+  overflow-x: auto;
+  tab-size: 2;
 }
 
-/* Comments */
-.comment {
-  color: #51ff00;
-  font-style: italic;
-}
+/* ── Token colours ─────────────────────────────────────────────────────── */
 
-/* Strings*/
-.string {
-  color: #992b00;
-}
+/* Comments – grey, italic */
+.comment       { color: #6a9955; font-style: italic; }
 
+/* Strings & charlists – orange */
+.string        { color: #ce9178; }
 
+/* Numbers – light green */
+.number        { color: #b5cea8; }
 
-/* Numbers */
-.number {
-  color: #ff00b3;
-}
+/* Atoms – cyan */
+.atom          { color: #4ec9b0; }
 
-/* Reserved words */
-.reserved-word {
-  color: #00e78e;
-  font-weight: bold;
-}
+/* Module names – yellow-green */
+.module        { color: #dcdcaa; }
 
-/* Module names (Enum, IO, File...) */
-.module {
-  color: #ff4040;
-}
+/* Reserved words (def, do, end, if …) – blue */
+.reserved-word { color: #569cd6; font-weight: bold; }
 
-/* Atoms (:ok, :error, :underweight) */
-.atom {
-  color: #ffffff;
-}
+/* Operators (|>, ->, ==, …) – white/light */
+.operator      { color: #d4d4d4; }
 
-/* Module attributes (@moduledoc) and __MODULE__ etc */
-.special {
-  color: #939300;
-  font-style: italic;
-}
+/* Punctuation (parens, brackets, …) – grey */
+.punctuation   { color: #808080; }
 
-/* Variables */
-.variable {
-  color: #ff0000;
-}
+/* Variables – light beige */
+.variable      { color: #9cdcfe; }
 
-/* Function names */
-.function {
-  color: #dcdcaa;
-}
+/* Functions – yellow */
+.function      { color: #dcdcaa; }
 
-/* Operators */
-.operator {
-  color: #00ffe5;
-}
+/* Module attributes (@doc, @spec) and __MODULE__ etc. */
+.special       { color: #c586c0; }
 
-/* Punctuation */
-.punctuation {
-  color: #33ff00;
-}
+/* Sigils (~r, ~s, ~w …) */
+.sigil         { color: #d16969; }
 
+/* Capture operator (&func/1, &1) */
+.capture       { color: #c586c0; }
 
-.text {
-  color: #8800ff;
-}
+/* Ignored variables (_name) – dim */
+.ignored       { color: #666666; font-style: italic; }
+
+/* Plain text (unrecognised characters) */
+.text          { color: #d4d4d4; }

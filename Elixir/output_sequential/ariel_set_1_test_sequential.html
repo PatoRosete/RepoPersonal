@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>ariel_set_1_test.exs</title>
+    <link rel="stylesheet" href="../token_colors.css">
+  </head>
+  <body>
+    <h1 class="filename">ariel_set_1_test.exs</h1>
+    <pre class="code-block">
+<span class="comment">#    Tests for the set of problems by Ariel Ortiz</span>
+<span class="comment">#    Use of functions, conditions, recursion and lists</span>
+<span class="comment">#</span>
+<span class="comment">#    Gilberto Echeverria</span>
+<span class="comment">#    2022-03-04</span>
+
+
+<span class="reserved-word">defmodule</span> <span class="module">Hw.Ariel1Test</span> <span class="reserved-word">do</span>
+  <span class="reserved-word">use</span> <span class="module">ExUnit.Case</span>
+  <span class="reserved-word">alias</span> <span class="module">Hw.Ariel1</span>
+
+  <span class="comment"># Functions</span>
+
+  <span class="variable">describe</span> <span class="string">"fahrenheit_to_celsius:"</span> <span class="reserved-word">do</span>
+     <span class="special">@describetag</span> <span class="atom">:optional</span>
+
+    <span class="special">@tag</span> <span class="atom">:optional</span>
+    <span class="variable">test</span> <span class="string">"212 F -&gt; 100 C"</span><span class="punctuation">,</span>
+      <span class="reserved-word">do</span><span class="punctuation">:</span> <span class="function">assert</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="module">Ariel1</span><span class="punctuation">.</span><span class="function">fahrenheit_to_celsius</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="number">212.0</span><span class="punctuation">)</span> <span class="operator">==</span> <span class="number">100.0</span><span class="punctuation">)</span>
+
+    <span class="comment"># @tag :optional</span>
+    <span class="variable">test</span> <span class="string">"32 F -&gt; 0 C"</span><span class="punctuation">,</span>
+      <span class="reserved-word">do</span><span class="punctuation">:</span> <span class="function">assert</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="module">Ariel1</span><span class="punctuation">.</span><span class="function">fahrenheit_to_celsius</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="number">32</span><span class="punctuation">)</span> <span class="operator">==</span> <span class="number">0</span><span class="punctuation">)</span>
+
+    <span class="comment"># @tag :optional</span>
+    <span class="variable">test</span> <span class="string">"-40 F -&gt; -40 C"</span><span class="punctuation">,</span>
+      <span class="reserved-word">do</span><span class="punctuation">:</span> <span class="function">assert</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="module">Ariel1</span><span class="punctuation">.</span><span class="function">fahrenheit_to_celsius</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="operator">-</span><span class="number">40</span><span class="punctuation">)</span> <span class="operator">==</span> <span class="operator">-</span><span class="number">40</span><span class="punctuation">)</span>
+  <span class="reserved-word">end</span>
+
+  <span class="variable">describe</span> <span class="string">"roots:"</span> <span class="reserved-word">do</span>
+     <span class="comment"># @describetag :optional</span>
+    <span class="comment"># @tag :optional</span>
+    <span class="variable">test</span> <span class="string">"roots(2, 4, 2)"</span><span class="punctuation">,</span>
+      <span class="reserved-word">do</span><span class="punctuation">:</span> <span class="function">assert</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="module">Ariel1</span><span class="punctuation">.</span><span class="function">roots</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="number">2</span><span class="punctuation">,</span> <span class="number">4</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">)</span> <span class="operator">==</span> <span class="operator">-</span><span class="number">1</span><span class="punctuation">)</span>
+
+    <span class="comment"># @tag :optional</span>
+    <span class="variable">test</span> <span class="string">"roots(1, 0, 0)"</span><span class="punctuation">,</span>
+      <span class="reserved-word">do</span><span class="punctuation">:</span> <span class="function">assert</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="module">Ariel1</span><span class="punctuation">.</span><span class="function">roots</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="number">1</span><span class="punctuation">,</span> <span class="number">0</span><span class="punctuation">,</span> <span class="number">0</span><span class="punctuation">)</span> <span class="operator">==</span> <span class="number">0</span><span class="punctuation">)</span>
+
+    <span class="comment"># @tag :optional</span>
+    <span class="variable">test</span> <span class="string">"roots(4, 5, 1)"</span><span class="punctuation">,</span>
+      <span class="reserved-word">do</span><span class="punctuation">:</span> <span class="function">assert</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="module">Ariel1</span><span class="punctuation">.</span><span class="function">roots</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="number">4</span><span class="punctuation">,</span> <span class="number">5</span><span class="punctuation">,</span> <span class="number">1</span><span class="punctuation">)</span> <span class="operator">==</span> <span class="operator">-</span><span class="number">1</span> <span class="operator">/</span> <span class="number">4</span><span class="punctuation">)</span>
+  <span class="reserved-word">end</span>
+
+  <span class="comment"># Conditionals</span>
+
+  <span class="variable">describe</span> <span class="string">"sign:"</span> <span class="reserved-word">do</span>
+     <span class="comment"># @describetag :optional</span>
+    <span class="comment"># @tag :optional</span>
+    <span class="variable">test</span> <span class="string">"negative number"</span><span class="punctuation">,</span>
+      <span class="reserved-word">do</span><span class="punctuation">:</span> <span class="function">assert</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="module">Ariel1</span><span class="punctuation">.</span><span class="function">sign</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="operator">-</span><span class="number">5</span><span class="punctuation">)</span> <span class="operator">==</span> <span class="operator">-</span><span class="number">1</span><span class="punctuation">)</span>
+
+    <span class="comment"># @tag :optional</span>
+    <span class="variable">test</span> <span class="string">"positive number"</span><span class="punctuation">,</span>
+      <span class="reserved-word">do</span><span class="punctuation">:</span> <span class="function">assert</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="module">Ariel1</span><span class="punctuation">.</span><span class="function">sign</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="number">5</span><span class="punctuation">)</span> <span class="operator">==</span> <span class="number">1</span><span class="punctuation">)</span>
+
+    <span class="comment"># @tag :optional</span>
+    <span class="variable">test</span> <span class="string">"zero"</span><span class="punctuation">,</span>
+      <span class="reserved-word">do</span><span class="punctuation">:</span> <span class="function">assert</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="module">Ariel1</span><span class="punctuation">.</span><span class="function">sign</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="number">0</span><span class="punctuation">)</span> <span class="operator">==</span> <span class="number">0</span><span class="punctuation">)</span>
+  <span class="reserved-word">end</span>
+
+  <span class="variable">describe</span> <span class="string">"bmi:"</span> <span class="reserved-word">do</span>
+     <span class="comment"># @describetag :optional</span>
+    <span class="comment"># @tag :optional</span>
+    <span class="variable">test</span> <span class="string">"underweight"</span><span class="punctuation">,</span>
+      <span class="reserved-word">do</span><span class="punctuation">:</span> <span class="function">assert</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="module">Ariel1</span><span class="punctuation">.</span><span class="function">bmi</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="number">47</span><span class="punctuation">,</span> <span class="number">1.7</span><span class="punctuation">)</span> <span class="operator">==</span> <span class="atom">:underweight</span><span class="punctuation">)</span>
+
+    <span class="comment"># @tag :optional</span>
+    <span class="variable">test</span> <span class="string">"normal"</span><span class="punctuation">,</span>
+      <span class="reserved-word">do</span><span class="punctuation">:</span> <span class="function">assert</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="module">Ariel1</span><span class="punctuation">.</span><span class="function">bmi</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="number">55</span><span class="punctuation">,</span> <span class="number">1.5</span><span class="punctuation">)</span> <span class="operator">==</span> <span class="atom">:normal</span><span class="punctuation">)</span>
+
+    <span class="comment"># @tag :optional</span>
+    <span class="variable">test</span> <span class="string">"obese1"</span><span class="punctuation">,</span>
+      <span class="reserved-word">do</span><span class="punctuation">:</span> <span class="function">assert</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="module">Ariel1</span><span class="punctuation">.</span><span class="function">bmi</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="number">76</span><span class="punctuation">,</span> <span class="number">1.7</span><span class="punctuation">)</span> <span class="operator">==</span> <span class="atom">:obese1</span><span class="punctuation">)</span>
+
+    <span class="comment"># @tag :optional</span>
+    <span class="variable">test</span> <span class="string">"obese2"</span><span class="punctuation">,</span>
+      <span class="reserved-word">do</span><span class="punctuation">:</span> <span class="function">assert</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="module">Ariel1</span><span class="punctuation">.</span><span class="function">bmi</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="number">81</span><span class="punctuation">,</span> <span class="number">1.6</span><span class="punctuation">)</span> <span class="operator">==</span> <span class="atom">:obese2</span><span class="punctuation">)</span>
+
+    <span class="comment"># @tag :optional</span>
+    <span class="variable">test</span> <span class="string">"obese3"</span><span class="punctuation">,</span>
+      <span class="reserved-word">do</span><span class="punctuation">:</span> <span class="function">assert</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="module">Ariel1</span><span class="punctuation">.</span><span class="function">bmi</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="number">120</span><span class="punctuation">,</span> <span class="number">1.6</span><span class="punctuation">)</span> <span class="operator">==</span> <span class="atom">:obese3</span><span class="punctuation">)</span>
+  <span class="reserved-word">end</span>
+
+  <span class="comment"># Recursion</span>
+
+  <span class="variable">describe</span> <span class="string">"factorial:"</span> <span class="reserved-word">do</span>
+     <span class="comment"># @describetag :optional</span>
+    <span class="comment"># @tag :optional</span>
+    <span class="variable">test</span> <span class="string">"factorial(0)"</span><span class="punctuation">,</span>
+      <span class="reserved-word">do</span><span class="punctuation">:</span> <span class="function">assert</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="module">Ariel1</span><span class="punctuation">.</span><span class="function">factorial</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="number">0</span><span class="punctuation">)</span> <span class="operator">==</span> <span class="number">1</span><span class="punctuation">)</span>
+
+    <span class="comment"># @tag :optional</span>
+    <span class="variable">test</span> <span class="string">"factorial(5)"</span><span class="punctuation">,</span>
+      <span class="reserved-word">do</span><span class="punctuation">:</span> <span class="function">assert</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="module">Ariel1</span><span class="punctuation">.</span><span class="function">factorial</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="number">5</span><span class="punctuation">)</span> <span class="operator">==</span> <span class="number">120</span><span class="punctuation">)</span>
+
+    <span class="comment"># @tag :optional</span>
+    <span class="variable">test</span> <span class="string">"factorial(120)"</span><span class="punctuation">,</span>
+      <span class="reserved-word">do</span><span class="punctuation">:</span>
+        <span class="function">assert</span><span class="punctuation">(</span><span class="punctuation">(</span>
+          <span class="module">Ariel1</span><span class="punctuation">.</span><span class="function">factorial</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="number">40</span><span class="punctuation">)</span> <span class="operator">==</span> <span class="number">815_915_283_247_897_734_345_611_269_596_115_894_272_000_000_000</span>
+        <span class="punctuation">)</span>
+  <span class="reserved-word">end</span>
+
+  <span class="variable">describe</span> <span class="string">"pow:"</span> <span class="reserved-word">do</span>
+     <span class="comment"># @describetag :optional</span>
+    <span class="comment"># @tag :optional</span>
+    <span class="variable">test</span> <span class="string">"5⁰"</span><span class="punctuation">,</span>
+      <span class="reserved-word">do</span><span class="punctuation">:</span> <span class="function">assert</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="module">Ariel1</span><span class="punctuation">.</span><span class="function">pow</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="number">5</span><span class="punctuation">,</span> <span class="number">0</span><span class="punctuation">)</span> <span class="operator">==</span> <span class="number">1</span><span class="punctuation">)</span>
+
+    <span class="comment"># @tag :optional</span>
+    <span class="variable">test</span> <span class="string">"-5³"</span><span class="punctuation">,</span>
+      <span class="reserved-word">do</span><span class="punctuation">:</span> <span class="function">assert</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="module">Ariel1</span><span class="punctuation">.</span><span class="function">pow</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="operator">-</span><span class="number">5</span><span class="punctuation">,</span> <span class="number">3</span><span class="punctuation">)</span> <span class="operator">==</span> <span class="operator">-</span><span class="number">125</span><span class="punctuation">)</span>
+
+    <span class="comment"># @tag :optional</span>
+    <span class="variable">test</span> <span class="string">"15¹²"</span><span class="punctuation">,</span>
+      <span class="reserved-word">do</span><span class="punctuation">:</span> <span class="function">assert</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="module">Ariel1</span><span class="punctuation">.</span><span class="function">pow</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="number">15</span><span class="punctuation">,</span> <span class="number">12</span><span class="punctuation">)</span> <span class="operator">==</span> <span class="number">129_746_337_890_625</span><span class="punctuation">)</span>
+  <span class="reserved-word">end</span>
+
+  <span class="variable">describe</span> <span class="string">"fib:"</span> <span class="reserved-word">do</span>
+     <span class="comment"># @describetag :optional</span>
+    <span class="comment"># @tag :optional</span>
+    <span class="variable">test</span> <span class="string">"6"</span><span class="punctuation">,</span>
+      <span class="reserved-word">do</span><span class="punctuation">:</span> <span class="function">assert</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="module">Ariel1</span><span class="punctuation">.</span><span class="function">fib</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="number">6</span><span class="punctuation">)</span> <span class="operator">==</span> <span class="number">8</span><span class="punctuation">)</span>
+
+    <span class="comment"># @tag :optional</span>
+    <span class="variable">test</span> <span class="string">"sequence 0 - 10"</span><span class="punctuation">,</span>
+      <span class="reserved-word">do</span><span class="punctuation">:</span>
+        <span class="function">assert</span><span class="punctuation">(</span><span class="punctuation">(</span>
+          <span class="module">Enum</span><span class="punctuation">.</span><span class="function">map</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="module">Enum</span><span class="punctuation">.</span><span class="function">to_list</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="number">0</span><span class="operator">..</span><span class="number">10</span><span class="punctuation">)</span><span class="punctuation">,</span> <span class="capture">&amp;Ariel1.fib/1</span><span class="punctuation">)</span> <span class="operator">==</span> <span class="punctuation">[</span><span class="number">0</span><span class="punctuation">,</span> <span class="number">1</span><span class="punctuation">,</span> <span class="number">1</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">,</span> <span class="number">3</span><span class="punctuation">,</span> <span class="number">5</span><span class="punctuation">,</span> <span class="number">8</span><span class="punctuation">,</span> <span class="number">13</span><span class="punctuation">,</span> <span class="number">21</span><span class="punctuation">,</span> <span class="number">34</span><span class="punctuation">,</span> <span class="number">55</span><span class="punctuation">]</span>
+        <span class="punctuation">)</span>
+
+    <span class="comment"># @tag :optional</span>
+    <span class="variable">test</span> <span class="string">"42"</span><span class="punctuation">,</span>
+      <span class="reserved-word">do</span><span class="punctuation">:</span> <span class="function">assert</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="module">Ariel1</span><span class="punctuation">.</span><span class="function">fib</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="number">42</span><span class="punctuation">)</span> <span class="operator">==</span> <span class="number">267_914_296</span><span class="punctuation">)</span>
+  <span class="reserved-word">end</span>
+
+  <span class="comment"># Lists</span>
+
+  <span class="variable">describe</span> <span class="string">"duplicate:"</span> <span class="reserved-word">do</span>
+     <span class="comment"># @describetag :optional</span>
+    <span class="comment"># @tag :optional</span>
+    <span class="variable">test</span> <span class="string">"empty list"</span><span class="punctuation">,</span>
+      <span class="reserved-word">do</span><span class="punctuation">:</span> <span class="function">assert</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="module">Ariel1</span><span class="punctuation">.</span><span class="function">duplicate</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="punctuation">[</span><span class="punctuation">]</span><span class="punctuation">)</span> <span class="operator">==</span> <span class="punctuation">[</span><span class="punctuation">]</span><span class="punctuation">)</span>
+
+    <span class="comment"># @tag :optional</span>
+    <span class="variable">test</span> <span class="string">"number list"</span><span class="punctuation">,</span>
+      <span class="reserved-word">do</span><span class="punctuation">:</span> <span class="function">assert</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="module">Ariel1</span><span class="punctuation">.</span><span class="function">duplicate</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="punctuation">[</span><span class="number">1</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">,</span> <span class="number">3</span><span class="punctuation">,</span> <span class="number">4</span><span class="punctuation">,</span> <span class="number">5</span><span class="punctuation">]</span><span class="punctuation">)</span> <span class="operator">==</span> <span class="punctuation">[</span><span class="number">1</span><span class="punctuation">,</span> <span class="number">1</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">,</span> <span class="number">3</span><span class="punctuation">,</span> <span class="number">3</span><span class="punctuation">,</span> <span class="number">4</span><span class="punctuation">,</span> <span class="number">4</span><span class="punctuation">,</span> <span class="number">5</span><span class="punctuation">,</span> <span class="number">5</span><span class="punctuation">]</span><span class="punctuation">)</span>
+
+    <span class="comment"># @tag :optional</span>
+    <span class="variable">test</span> <span class="string">"atom list"</span><span class="punctuation">,</span>
+      <span class="reserved-word">do</span><span class="punctuation">:</span>
+        <span class="function">assert</span><span class="punctuation">(</span><span class="punctuation">(</span>
+          <span class="module">Ariel1</span><span class="punctuation">.</span><span class="function">duplicate</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="punctuation">[</span><span class="atom">:a</span><span class="punctuation">,</span> <span class="atom">:b</span><span class="punctuation">,</span> <span class="atom">:c</span><span class="punctuation">,</span> <span class="atom">:d</span><span class="punctuation">,</span> <span class="atom">:e</span><span class="punctuation">,</span> <span class="atom">:f</span><span class="punctuation">,</span> <span class="atom">:g</span><span class="punctuation">,</span> <span class="atom">:h</span><span class="punctuation">]</span><span class="punctuation">)</span> <span class="operator">==</span> <span class="punctuation">[</span>
+            <span class="atom">:a</span><span class="punctuation">,</span>
+            <span class="atom">:a</span><span class="punctuation">,</span>
+            <span class="atom">:b</span><span class="punctuation">,</span>
+            <span class="atom">:b</span><span class="punctuation">,</span>
+            <span class="atom">:c</span><span class="punctuation">,</span>
+            <span class="atom">:c</span><span class="punctuation">,</span>
+            <span class="atom">:d</span><span class="punctuation">,</span>
+            <span class="atom">:d</span><span class="punctuation">,</span>
+            <span class="atom">:e</span><span class="punctuation">,</span>
+            <span class="atom">:e</span><span class="punctuation">,</span>
+            <span class="atom">:f</span><span class="punctuation">,</span>
+            <span class="atom">:f</span><span class="punctuation">,</span>
+            <span class="atom">:g</span><span class="punctuation">,</span>
+            <span class="atom">:g</span><span class="punctuation">,</span>
+            <span class="atom">:h</span><span class="punctuation">,</span>
+            <span class="atom">:h</span>
+          <span class="punctuation">]</span>
+        <span class="punctuation">)</span>
+  <span class="reserved-word">end</span>
+
+  <span class="variable">describe</span> <span class="string">"enlist:"</span> <span class="reserved-word">do</span>
+     <span class="comment"># @describetag :optional</span>
+    <span class="comment"># @tag :optional</span>
+    <span class="variable">test</span> <span class="string">"empty list"</span><span class="punctuation">,</span>
+      <span class="reserved-word">do</span><span class="punctuation">:</span> <span class="function">assert</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="module">Ariel1</span><span class="punctuation">.</span><span class="function">enlist</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="punctuation">[</span><span class="punctuation">]</span><span class="punctuation">)</span> <span class="operator">==</span> <span class="punctuation">[</span><span class="punctuation">]</span><span class="punctuation">)</span>
+
+    <span class="comment"># @tag :optional</span>
+    <span class="variable">test</span> <span class="string">"atom list"</span><span class="punctuation">,</span>
+      <span class="reserved-word">do</span><span class="punctuation">:</span> <span class="function">assert</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="module">Ariel1</span><span class="punctuation">.</span><span class="function">enlist</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="punctuation">[</span><span class="atom">:a</span><span class="punctuation">,</span> <span class="atom">:b</span><span class="punctuation">,</span> <span class="atom">:c</span><span class="punctuation">]</span><span class="punctuation">)</span> <span class="operator">==</span> <span class="punctuation">[</span><span class="punctuation">[</span><span class="atom">:a</span><span class="punctuation">]</span><span class="punctuation">,</span> <span class="punctuation">[</span><span class="atom">:b</span><span class="punctuation">]</span><span class="punctuation">,</span> <span class="punctuation">[</span><span class="atom">:c</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="punctuation">)</span>
+
+    <span class="comment"># @tag :optional</span>
+    <span class="variable">test</span> <span class="string">"nested lists"</span><span class="punctuation">,</span>
+      <span class="reserved-word">do</span><span class="punctuation">:</span> <span class="function">assert</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="module">Ariel1</span><span class="punctuation">.</span><span class="function">enlist</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="punctuation">[</span><span class="punctuation">[</span><span class="number">1</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">,</span> <span class="number">3</span><span class="punctuation">]</span><span class="punctuation">,</span> <span class="number">4</span><span class="punctuation">,</span> <span class="punctuation">[</span><span class="number">5</span><span class="punctuation">]</span><span class="punctuation">,</span> <span class="number">7</span><span class="punctuation">,</span> <span class="number">8</span><span class="punctuation">]</span><span class="punctuation">)</span> <span class="operator">==</span> <span class="punctuation">[</span><span class="punctuation">[</span><span class="punctuation">[</span><span class="number">1</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">,</span> <span class="number">3</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="punctuation">,</span> <span class="punctuation">[</span><span class="number">4</span><span class="punctuation">]</span><span class="punctuation">,</span> <span class="punctuation">[</span><span class="punctuation">[</span><span class="number">5</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="punctuation">,</span> <span class="punctuation">[</span><span class="number">7</span><span class="punctuation">]</span><span class="punctuation">,</span> <span class="punctuation">[</span><span class="number">8</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="punctuation">)</span>
+  <span class="reserved-word">end</span>
+
+  <span class="variable">describe</span> <span class="string">"positives:"</span> <span class="reserved-word">do</span>
+     <span class="comment"># @describetag :optional</span>
+    <span class="comment"># @tag :optional</span>
+    <span class="variable">test</span> <span class="string">"empty list"</span><span class="punctuation">,</span>
+      <span class="reserved-word">do</span><span class="punctuation">:</span> <span class="function">assert</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="module">Ariel1</span><span class="punctuation">.</span><span class="function">positives</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="punctuation">[</span><span class="punctuation">]</span><span class="punctuation">)</span> <span class="operator">==</span> <span class="punctuation">[</span><span class="punctuation">]</span><span class="punctuation">)</span>
+
+    <span class="comment"># @tag :optional</span>
+    <span class="variable">test</span> <span class="string">"mixed list"</span><span class="punctuation">,</span>
+      <span class="reserved-word">do</span><span class="punctuation">:</span> <span class="function">assert</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="module">Ariel1</span><span class="punctuation">.</span><span class="function">positives</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="punctuation">[</span><span class="number">12</span><span class="punctuation">,</span> <span class="operator">-</span><span class="number">4</span><span class="punctuation">,</span> <span class="number">3</span><span class="punctuation">,</span> <span class="operator">-</span><span class="number">1</span><span class="punctuation">,</span> <span class="operator">-</span><span class="number">10</span><span class="punctuation">,</span> <span class="operator">-</span><span class="number">13</span><span class="punctuation">,</span> <span class="number">6</span><span class="punctuation">,</span> <span class="operator">-</span><span class="number">5</span><span class="punctuation">]</span><span class="punctuation">)</span> <span class="operator">==</span> <span class="punctuation">[</span><span class="number">12</span><span class="punctuation">,</span> <span class="number">3</span><span class="punctuation">,</span> <span class="number">6</span><span class="punctuation">]</span><span class="punctuation">)</span>
+
+    <span class="comment"># @tag :optional</span>
+    <span class="variable">test</span> <span class="string">"only negatives list"</span><span class="punctuation">,</span>
+      <span class="reserved-word">do</span><span class="punctuation">:</span> <span class="function">assert</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="module">Ariel1</span><span class="punctuation">.</span><span class="function">positives</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="punctuation">[</span><span class="operator">-</span><span class="number">4</span><span class="punctuation">,</span> <span class="operator">-</span><span class="number">1</span><span class="punctuation">,</span> <span class="operator">-</span><span class="number">10</span><span class="punctuation">,</span> <span class="operator">-</span><span class="number">13</span><span class="punctuation">,</span> <span class="operator">-</span><span class="number">5</span><span class="punctuation">]</span><span class="punctuation">)</span> <span class="operator">==</span> <span class="punctuation">[</span><span class="punctuation">]</span><span class="punctuation">)</span>
+
+    <span class="comment"># @tag :optional</span>
+    <span class="variable">test</span> <span class="string">"only positives list"</span><span class="punctuation">,</span>
+      <span class="reserved-word">do</span><span class="punctuation">:</span> <span class="function">assert</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="module">Ariel1</span><span class="punctuation">.</span><span class="function">positives</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="punctuation">[</span><span class="number">6</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">,</span> <span class="number">9</span><span class="punctuation">,</span> <span class="number">13</span><span class="punctuation">]</span><span class="punctuation">)</span> <span class="operator">==</span> <span class="punctuation">[</span><span class="number">6</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">,</span> <span class="number">9</span><span class="punctuation">,</span> <span class="number">13</span><span class="punctuation">]</span><span class="punctuation">)</span>
+  <span class="reserved-word">end</span>
+
+  <span class="variable">describe</span> <span class="string">"add_list:"</span> <span class="reserved-word">do</span>
+     <span class="comment"># @describetag :optional</span>
+    <span class="comment"># @tag :optional</span>
+    <span class="variable">test</span> <span class="string">"empty list"</span><span class="punctuation">,</span>
+      <span class="reserved-word">do</span><span class="punctuation">:</span> <span class="function">assert</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="module">Ariel1</span><span class="punctuation">.</span><span class="function">add_list</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="punctuation">[</span><span class="punctuation">]</span><span class="punctuation">)</span> <span class="operator">==</span> <span class="number">0</span><span class="punctuation">)</span>
+
+    <span class="comment"># @tag :optional</span>
+    <span class="variable">test</span> <span class="string">"small list"</span><span class="punctuation">,</span>
+      <span class="reserved-word">do</span><span class="punctuation">:</span> <span class="function">assert</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="module">Ariel1</span><span class="punctuation">.</span><span class="function">add_list</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="punctuation">[</span><span class="number">2</span><span class="punctuation">,</span> <span class="number">4</span><span class="punctuation">,</span> <span class="number">1</span><span class="punctuation">,</span> <span class="number">3</span><span class="punctuation">]</span><span class="punctuation">)</span> <span class="operator">==</span> <span class="number">10</span><span class="punctuation">)</span>
+
+    <span class="comment"># @tag :optional</span>
+    <span class="variable">test</span> <span class="string">"larger list"</span><span class="punctuation">,</span>
+      <span class="reserved-word">do</span><span class="punctuation">:</span> <span class="function">assert</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="module">Ariel1</span><span class="punctuation">.</span><span class="function">add_list</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="punctuation">[</span><span class="number">1</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">,</span> <span class="number">3</span><span class="punctuation">,</span> <span class="number">4</span><span class="punctuation">,</span> <span class="number">5</span><span class="punctuation">,</span> <span class="number">6</span><span class="punctuation">,</span> <span class="number">7</span><span class="punctuation">,</span> <span class="number">8</span><span class="punctuation">,</span> <span class="number">9</span><span class="punctuation">,</span> <span class="number">10</span><span class="punctuation">]</span><span class="punctuation">)</span> <span class="operator">==</span> <span class="number">55</span><span class="punctuation">)</span>
+  <span class="reserved-word">end</span>
+
+  <span class="variable">describe</span> <span class="string">"invert_pairs:"</span> <span class="reserved-word">do</span>
+     <span class="comment"># @describetag :optional</span>
+    <span class="comment"># @tag :optional</span>
+    <span class="variable">test</span> <span class="string">"empty list"</span><span class="punctuation">,</span>
+      <span class="reserved-word">do</span><span class="punctuation">:</span> <span class="function">assert</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="module">Ariel1</span><span class="punctuation">.</span><span class="function">invert_pairs</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="punctuation">[</span><span class="punctuation">]</span><span class="punctuation">)</span> <span class="operator">==</span> <span class="punctuation">[</span><span class="punctuation">]</span><span class="punctuation">)</span>
+
+    <span class="comment"># @tag :optional</span>
+    <span class="variable">test</span> <span class="string">"single pair list"</span><span class="punctuation">,</span>
+      <span class="reserved-word">do</span><span class="punctuation">:</span> <span class="function">assert</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="module">Ariel1</span><span class="punctuation">.</span><span class="function">invert_pairs</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="punctuation">[</span><span class="punctuation">{</span><span class="number">1</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">}</span><span class="punctuation">]</span><span class="punctuation">)</span> <span class="operator">==</span> <span class="punctuation">[</span><span class="punctuation">{</span><span class="number">2</span><span class="punctuation">,</span> <span class="number">1</span><span class="punctuation">}</span><span class="punctuation">]</span><span class="punctuation">)</span>
+
+    <span class="comment"># @tag :optional</span>
+    <span class="variable">test</span> <span class="string">"mixed list"</span><span class="punctuation">,</span>
+      <span class="reserved-word">do</span><span class="punctuation">:</span>
+        <span class="function">assert</span><span class="punctuation">(</span><span class="punctuation">(</span>
+          <span class="module">Ariel1</span><span class="punctuation">.</span><span class="function">invert_pairs</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="punctuation">[</span><span class="punctuation">{</span><span class="number">1</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">}</span><span class="punctuation">,</span> <span class="punctuation">{</span><span class="atom">:a</span><span class="punctuation">,</span> <span class="atom">:b</span><span class="punctuation">}</span><span class="punctuation">,</span> <span class="punctuation">{</span><span class="string">"Monday"</span><span class="punctuation">,</span> <span class="string">"Tuesday"</span><span class="punctuation">}</span><span class="punctuation">]</span><span class="punctuation">)</span> <span class="operator">==</span>
+            <span class="punctuation">[</span><span class="punctuation">{</span><span class="number">2</span><span class="punctuation">,</span> <span class="number">1</span><span class="punctuation">}</span><span class="punctuation">,</span> <span class="punctuation">{</span><span class="atom">:b</span><span class="punctuation">,</span> <span class="atom">:a</span><span class="punctuation">}</span><span class="punctuation">,</span> <span class="punctuation">{</span><span class="string">"Tuesday"</span><span class="punctuation">,</span> <span class="string">"Monday"</span><span class="punctuation">}</span><span class="punctuation">]</span>
+        <span class="punctuation">)</span>
+
+    <span class="comment"># @tag :optional</span>
+    <span class="variable">test</span> <span class="string">"atom-number list"</span><span class="punctuation">,</span>
+      <span class="reserved-word">do</span><span class="punctuation">:</span>
+        <span class="function">assert</span><span class="punctuation">(</span><span class="punctuation">(</span>
+          <span class="module">Ariel1</span><span class="punctuation">.</span><span class="function">invert_pairs</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="punctuation">[</span><span class="punctuation">{</span><span class="atom">:a</span><span class="punctuation">,</span> <span class="number">1</span><span class="punctuation">}</span><span class="punctuation">,</span> <span class="punctuation">{</span><span class="atom">:a</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">}</span><span class="punctuation">,</span> <span class="punctuation">{</span><span class="atom">:b</span><span class="punctuation">,</span> <span class="number">1</span><span class="punctuation">}</span><span class="punctuation">,</span> <span class="punctuation">{</span><span class="atom">:b</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">}</span><span class="punctuation">]</span><span class="punctuation">)</span> <span class="operator">==</span>
+            <span class="punctuation">[</span><span class="punctuation">{</span><span class="number">1</span><span class="punctuation">,</span> <span class="atom">:a</span><span class="punctuation">}</span><span class="punctuation">,</span> <span class="punctuation">{</span><span class="number">2</span><span class="punctuation">,</span> <span class="atom">:a</span><span class="punctuation">}</span><span class="punctuation">,</span> <span class="punctuation">{</span><span class="number">1</span><span class="punctuation">,</span> <span class="atom">:b</span><span class="punctuation">}</span><span class="punctuation">,</span> <span class="punctuation">{</span><span class="number">2</span><span class="punctuation">,</span> <span class="atom">:b</span><span class="punctuation">}</span><span class="punctuation">]</span>
+        <span class="punctuation">)</span>
+
+    <span class="comment"># @tag :optional</span>
+    <span class="variable">test</span> <span class="string">"month-number list"</span><span class="punctuation">,</span>
+      <span class="reserved-word">do</span><span class="punctuation">:</span>
+        <span class="function">assert</span><span class="punctuation">(</span><span class="punctuation">(</span>
+          <span class="module">Ariel1</span><span class="punctuation">.</span><span class="function">invert_pairs</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="punctuation">[</span><span class="punctuation">{</span><span class="atom">:January</span><span class="punctuation">,</span> <span class="number">1</span><span class="punctuation">}</span><span class="punctuation">,</span> <span class="punctuation">{</span><span class="atom">:February</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">}</span><span class="punctuation">,</span> <span class="punctuation">{</span><span class="atom">:March</span><span class="punctuation">,</span> <span class="number">3</span><span class="punctuation">}</span><span class="punctuation">]</span><span class="punctuation">)</span> <span class="operator">==</span>
+            <span class="punctuation">[</span><span class="punctuation">{</span><span class="number">1</span><span class="punctuation">,</span> <span class="atom">:January</span><span class="punctuation">}</span><span class="punctuation">,</span> <span class="punctuation">{</span><span class="number">2</span><span class="punctuation">,</span> <span class="atom">:February</span><span class="punctuation">}</span><span class="punctuation">,</span> <span class="punctuation">{</span><span class="number">3</span><span class="punctuation">,</span> <span class="atom">:March</span><span class="punctuation">}</span><span class="punctuation">]</span>
+        <span class="punctuation">)</span>
+  <span class="reserved-word">end</span>
+
+  <span class="variable">describe</span> <span class="string">"is_atom_list:"</span> <span class="reserved-word">do</span>
+     <span class="comment"># @describetag :optional</span>
+    <span class="comment"># @tag :optional</span>
+    <span class="variable">test</span> <span class="string">"empty list"</span><span class="punctuation">,</span>
+      <span class="reserved-word">do</span><span class="punctuation">:</span> <span class="function">assert</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="module">Ariel1</span><span class="punctuation">.</span><span class="function">is_atom_list</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="punctuation">[</span><span class="punctuation">]</span><span class="punctuation">)</span> <span class="operator">==</span> <span class="reserved-word">true</span><span class="punctuation">)</span>
+
+    <span class="comment"># @tag :optional</span>
+    <span class="variable">test</span> <span class="string">"only atoms list"</span><span class="punctuation">,</span>
+      <span class="reserved-word">do</span><span class="punctuation">:</span> <span class="function">assert</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="module">Ariel1</span><span class="punctuation">.</span><span class="function">is_atom_list</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="punctuation">[</span><span class="atom">:a</span><span class="punctuation">,</span> <span class="atom">:b</span><span class="punctuation">,</span> <span class="atom">:c</span><span class="punctuation">,</span> <span class="atom">:d</span><span class="punctuation">,</span> <span class="atom">:e</span><span class="punctuation">]</span><span class="punctuation">)</span> <span class="operator">==</span> <span class="reserved-word">true</span><span class="punctuation">)</span>
+
+    <span class="comment"># @tag :optional</span>
+    <span class="variable">test</span> <span class="string">"mixed list"</span><span class="punctuation">,</span>
+      <span class="reserved-word">do</span><span class="punctuation">:</span> <span class="function">assert</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="module">Ariel1</span><span class="punctuation">.</span><span class="function">is_atom_list</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="punctuation">[</span><span class="atom">:a</span><span class="punctuation">,</span> <span class="atom">:b</span><span class="punctuation">,</span> <span class="atom">:c</span><span class="punctuation">,</span> <span class="atom">:d</span><span class="punctuation">,</span> <span class="number">42</span><span class="punctuation">,</span> <span class="atom">:e</span><span class="punctuation">]</span><span class="punctuation">)</span> <span class="operator">==</span> <span class="reserved-word">false</span><span class="punctuation">)</span>
+  <span class="reserved-word">end</span>
+
+  <span class="variable">describe</span> <span class="string">"swapper:"</span> <span class="reserved-word">do</span>
+     <span class="comment"># @describetag :optional</span>
+    <span class="comment"># @tag :optional</span>
+    <span class="variable">test</span> <span class="string">"empty list"</span><span class="punctuation">,</span>
+      <span class="reserved-word">do</span><span class="punctuation">:</span> <span class="function">assert</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="module">Ariel1</span><span class="punctuation">.</span><span class="function">swapper</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="punctuation">[</span><span class="punctuation">]</span><span class="punctuation">,</span> <span class="atom">:a</span><span class="punctuation">,</span> <span class="atom">:b</span><span class="punctuation">)</span> <span class="operator">==</span> <span class="punctuation">[</span><span class="punctuation">]</span><span class="punctuation">)</span>
+
+    <span class="comment"># @tag :optional</span>
+    <span class="variable">test</span> <span class="string">"no swaps"</span><span class="punctuation">,</span>
+      <span class="reserved-word">do</span><span class="punctuation">:</span> <span class="function">assert</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="module">Ariel1</span><span class="punctuation">.</span><span class="function">swapper</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="punctuation">[</span><span class="atom">:x</span><span class="punctuation">,</span> <span class="atom">:y</span><span class="punctuation">,</span> <span class="atom">:z</span><span class="punctuation">]</span><span class="punctuation">,</span> <span class="atom">:a</span><span class="punctuation">,</span> <span class="atom">:b</span><span class="punctuation">)</span> <span class="operator">==</span> <span class="punctuation">[</span><span class="atom">:x</span><span class="punctuation">,</span> <span class="atom">:y</span><span class="punctuation">,</span> <span class="atom">:z</span><span class="punctuation">]</span><span class="punctuation">)</span>
+
+    <span class="comment"># @tag :optional</span>
+    <span class="variable">test</span> <span class="string">"atom list"</span><span class="punctuation">,</span>
+      <span class="reserved-word">do</span><span class="punctuation">:</span> <span class="function">assert</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="module">Ariel1</span><span class="punctuation">.</span><span class="function">swapper</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="punctuation">[</span><span class="atom">:a</span><span class="punctuation">,</span> <span class="atom">:b</span><span class="punctuation">,</span> <span class="atom">:c</span><span class="punctuation">,</span> <span class="atom">:b</span><span class="punctuation">,</span> <span class="atom">:d</span><span class="punctuation">]</span><span class="punctuation">,</span> <span class="atom">:a</span><span class="punctuation">,</span> <span class="atom">:b</span><span class="punctuation">)</span> <span class="operator">==</span> <span class="punctuation">[</span><span class="atom">:b</span><span class="punctuation">,</span> <span class="atom">:a</span><span class="punctuation">,</span> <span class="atom">:c</span><span class="punctuation">,</span> <span class="atom">:a</span><span class="punctuation">,</span> <span class="atom">:d</span><span class="punctuation">]</span><span class="punctuation">)</span>
+
+    <span class="comment"># @tag :optional</span>
+    <span class="variable">test</span> <span class="string">"number list"</span><span class="punctuation">,</span>
+      <span class="reserved-word">do</span><span class="punctuation">:</span>
+        <span class="function">assert</span><span class="punctuation">(</span><span class="punctuation">(</span>
+          <span class="module">Ariel1</span><span class="punctuation">.</span><span class="function">swapper</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="punctuation">[</span><span class="number">4</span><span class="punctuation">,</span> <span class="number">4</span><span class="punctuation">,</span> <span class="number">5</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">,</span> <span class="number">4</span><span class="punctuation">,</span> <span class="number">8</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">,</span> <span class="number">5</span><span class="punctuation">,</span> <span class="number">6</span><span class="punctuation">,</span> <span class="number">4</span><span class="punctuation">,</span> <span class="number">5</span><span class="punctuation">,</span> <span class="number">1</span><span class="punctuation">,</span> <span class="number">9</span><span class="punctuation">,</span> <span class="number">5</span><span class="punctuation">,</span> <span class="number">9</span><span class="punctuation">,</span> <span class="number">9</span><span class="punctuation">,</span> <span class="number">1</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">,</span> <span class="number">4</span><span class="punctuation">]</span><span class="punctuation">,</span> <span class="number">1</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">)</span> <span class="operator">==</span> <span class="punctuation">[</span>
+            <span class="number">4</span><span class="punctuation">,</span>
+            <span class="number">4</span><span class="punctuation">,</span>
+            <span class="number">5</span><span class="punctuation">,</span>
+            <span class="number">1</span><span class="punctuation">,</span>
+            <span class="number">4</span><span class="punctuation">,</span>
+            <span class="number">8</span><span class="punctuation">,</span>
+            <span class="number">1</span><span class="punctuation">,</span>
+            <span class="number">5</span><span class="punctuation">,</span>
+            <span class="number">6</span><span class="punctuation">,</span>
+            <span class="number">4</span><span class="punctuation">,</span>
+            <span class="number">5</span><span class="punctuation">,</span>
+            <span class="number">2</span><span class="punctuation">,</span>
+            <span class="number">9</span><span class="punctuation">,</span>
+            <span class="number">5</span><span class="punctuation">,</span>
+            <span class="number">9</span><span class="punctuation">,</span>
+            <span class="number">9</span><span class="punctuation">,</span>
+            <span class="number">2</span><span class="punctuation">,</span>
+            <span class="number">1</span><span class="punctuation">,</span>
+            <span class="number">1</span><span class="punctuation">,</span>
+            <span class="number">4</span>
+          <span class="punctuation">]</span>
+        <span class="punctuation">)</span>
+
+    <span class="comment"># @tag :optional</span>
+    <span class="variable">test</span> <span class="string">"number list without swaps"</span><span class="punctuation">,</span>
+      <span class="reserved-word">do</span><span class="punctuation">:</span>
+        <span class="function">assert</span><span class="punctuation">(</span><span class="punctuation">(</span>
+          <span class="module">Ariel1</span><span class="punctuation">.</span><span class="function">swapper</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="punctuation">[</span><span class="number">4</span><span class="punctuation">,</span> <span class="number">3</span><span class="punctuation">,</span> <span class="number">4</span><span class="punctuation">,</span> <span class="number">9</span><span class="punctuation">,</span> <span class="number">9</span><span class="punctuation">,</span> <span class="number">3</span><span class="punctuation">,</span> <span class="number">3</span><span class="punctuation">,</span> <span class="number">3</span><span class="punctuation">,</span> <span class="number">9</span><span class="punctuation">,</span> <span class="number">9</span><span class="punctuation">,</span> <span class="number">7</span><span class="punctuation">,</span> <span class="number">9</span><span class="punctuation">,</span> <span class="number">3</span><span class="punctuation">,</span> <span class="number">7</span><span class="punctuation">,</span> <span class="number">8</span><span class="punctuation">,</span> <span class="number">7</span><span class="punctuation">,</span> <span class="number">8</span><span class="punctuation">,</span> <span class="number">4</span><span class="punctuation">,</span> <span class="number">5</span><span class="punctuation">,</span> <span class="number">6</span><span class="punctuation">]</span><span class="punctuation">,</span> <span class="number">1</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">)</span> <span class="operator">==</span> <span class="punctuation">[</span>
+            <span class="number">4</span><span class="punctuation">,</span>
+            <span class="number">3</span><span class="punctuation">,</span>
+            <span class="number">4</span><span class="punctuation">,</span>
+            <span class="number">9</span><span class="punctuation">,</span>
+            <span class="number">9</span><span class="punctuation">,</span>
+            <span class="number">3</span><span class="punctuation">,</span>
+            <span class="number">3</span><span class="punctuation">,</span>
+            <span class="number">3</span><span class="punctuation">,</span>
+            <span class="number">9</span><span class="punctuation">,</span>
+            <span class="number">9</span><span class="punctuation">,</span>
+            <span class="number">7</span><span class="punctuation">,</span>
+            <span class="number">9</span><span class="punctuation">,</span>
+            <span class="number">3</span><span class="punctuation">,</span>
+            <span class="number">7</span><span class="punctuation">,</span>
+            <span class="number">8</span><span class="punctuation">,</span>
+            <span class="number">7</span><span class="punctuation">,</span>
+            <span class="number">8</span><span class="punctuation">,</span>
+            <span class="number">4</span><span class="punctuation">,</span>
+            <span class="number">5</span><span class="punctuation">,</span>
+            <span class="number">6</span>
+          <span class="punctuation">]</span>
+        <span class="punctuation">)</span>
+
+    <span class="comment"># @tag :optional</span>
+    <span class="variable">test</span> <span class="string">"big bang list"</span><span class="punctuation">,</span>
+      <span class="reserved-word">do</span><span class="punctuation">:</span>
+        <span class="function">assert</span><span class="punctuation">(</span><span class="punctuation">(</span>
+          <span class="module">Ariel1</span><span class="punctuation">.</span><span class="function">swapper</span><span class="punctuation">(</span><span class="punctuation">(</span>
+            <span class="punctuation">[</span>
+              <span class="atom">:soft</span><span class="punctuation">,</span>
+              <span class="atom">:kitty</span><span class="punctuation">,</span>
+              <span class="atom">:warm</span><span class="punctuation">,</span>
+              <span class="atom">:kitty</span><span class="punctuation">,</span>
+              <span class="atom">:little</span><span class="punctuation">,</span>
+              <span class="atom">:ball</span><span class="punctuation">,</span>
+              <span class="atom">:of</span><span class="punctuation">,</span>
+              <span class="atom">:fur</span><span class="punctuation">,</span>
+              <span class="atom">:happy</span><span class="punctuation">,</span>
+              <span class="atom">:kitty</span><span class="punctuation">,</span>
+              <span class="atom">:sleepy</span><span class="punctuation">,</span>
+              <span class="atom">:kitty</span><span class="punctuation">,</span>
+              <span class="atom">:purr</span><span class="punctuation">,</span>
+              <span class="atom">:purr</span><span class="punctuation">,</span>
+              <span class="atom">:purr</span>
+            <span class="punctuation">]</span><span class="punctuation">,</span>
+            <span class="atom">:purr</span><span class="punctuation">,</span>
+            <span class="atom">:kitty</span>
+          <span class="punctuation">)</span> <span class="operator">==</span> <span class="punctuation">[</span>
+            <span class="atom">:soft</span><span class="punctuation">,</span>
+            <span class="atom">:purr</span><span class="punctuation">,</span>
+            <span class="atom">:warm</span><span class="punctuation">,</span>
+            <span class="atom">:purr</span><span class="punctuation">,</span>
+            <span class="atom">:little</span><span class="punctuation">,</span>
+            <span class="atom">:ball</span><span class="punctuation">,</span>
+            <span class="atom">:of</span><span class="punctuation">,</span>
+            <span class="atom">:fur</span><span class="punctuation">,</span>
+            <span class="atom">:happy</span><span class="punctuation">,</span>
+            <span class="atom">:purr</span><span class="punctuation">,</span>
+            <span class="atom">:sleepy</span><span class="punctuation">,</span>
+            <span class="atom">:purr</span><span class="punctuation">,</span>
+            <span class="atom">:kitty</span><span class="punctuation">,</span>
+            <span class="atom">:kitty</span><span class="punctuation">,</span>
+            <span class="atom">:kitty</span>
+          <span class="punctuation">]</span>
+        <span class="punctuation">)</span>
+  <span class="reserved-word">end</span>
+
+  <span class="variable">describe</span> <span class="string">"dot_product:"</span> <span class="reserved-word">do</span>
+     <span class="comment"># @describetag :optional</span>
+    <span class="comment"># @tag :optional</span>
+    <span class="variable">test</span> <span class="string">"empty list"</span><span class="punctuation">,</span>
+      <span class="reserved-word">do</span><span class="punctuation">:</span> <span class="function">assert</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="module">Ariel1</span><span class="punctuation">.</span><span class="function">dot_product</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="punctuation">[</span><span class="punctuation">]</span><span class="punctuation">,</span> <span class="punctuation">[</span><span class="punctuation">]</span><span class="punctuation">)</span> <span class="operator">==</span> <span class="number">0</span><span class="punctuation">)</span>
+
+    <span class="comment"># @tag :optional</span>
+    <span class="variable">test</span> <span class="string">"integer list"</span><span class="punctuation">,</span>
+      <span class="reserved-word">do</span><span class="punctuation">:</span> <span class="function">assert</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="module">Ariel1</span><span class="punctuation">.</span><span class="function">dot_product</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="punctuation">[</span><span class="number">1</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">,</span> <span class="number">3</span><span class="punctuation">]</span><span class="punctuation">,</span> <span class="punctuation">[</span><span class="number">4</span><span class="punctuation">,</span> <span class="number">5</span><span class="punctuation">,</span> <span class="number">6</span><span class="punctuation">]</span><span class="punctuation">)</span> <span class="operator">==</span> <span class="number">32</span><span class="punctuation">)</span>
+
+    <span class="comment"># @tag :optional</span>
+    <span class="variable">test</span> <span class="string">"float list"</span><span class="punctuation">,</span>
+      <span class="reserved-word">do</span><span class="punctuation">:</span>
+        <span class="function">assert</span><span class="punctuation">(</span><span class="punctuation">(</span>
+          <span class="module">Ariel1</span><span class="punctuation">.</span><span class="function">dot_product</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="punctuation">[</span><span class="number">1.3</span><span class="punctuation">,</span> <span class="number">3.4</span><span class="punctuation">,</span> <span class="number">5.7</span><span class="punctuation">,</span> <span class="number">9.5</span><span class="punctuation">,</span> <span class="number">10.4</span><span class="punctuation">]</span><span class="punctuation">,</span> <span class="punctuation">[</span><span class="operator">-</span><span class="number">4.5</span><span class="punctuation">,</span> <span class="number">3.0</span><span class="punctuation">,</span> <span class="number">1.5</span><span class="punctuation">,</span> <span class="number">0.9</span><span class="punctuation">,</span> <span class="number">0.0</span><span class="punctuation">]</span><span class="punctuation">)</span> <span class="operator">==</span> <span class="number">21.45</span>
+        <span class="punctuation">)</span>
+  <span class="reserved-word">end</span>
+
+  <span class="variable">describe</span> <span class="string">"average:"</span> <span class="reserved-word">do</span>
+     <span class="comment"># @describetag :optional</span>
+    <span class="comment"># @tag :optional</span>
+    <span class="variable">test</span> <span class="string">"empty list"</span><span class="punctuation">,</span>
+      <span class="reserved-word">do</span><span class="punctuation">:</span> <span class="function">assert</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="module">Ariel1</span><span class="punctuation">.</span><span class="function">average</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="punctuation">[</span><span class="punctuation">]</span><span class="punctuation">)</span> <span class="operator">==</span> <span class="number">0</span><span class="punctuation">)</span>
+
+    <span class="comment"># @tag :optional</span>
+    <span class="variable">test</span> <span class="string">"single item list"</span><span class="punctuation">,</span>
+      <span class="reserved-word">do</span><span class="punctuation">:</span> <span class="function">assert</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="module">Ariel1</span><span class="punctuation">.</span><span class="function">average</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="punctuation">[</span><span class="number">4</span><span class="punctuation">]</span><span class="punctuation">)</span> <span class="operator">==</span> <span class="number">4</span><span class="punctuation">)</span>
+
+    <span class="comment"># @tag :optional</span>
+    <span class="variable">test</span> <span class="string">"integer list"</span><span class="punctuation">,</span>
+      <span class="reserved-word">do</span><span class="punctuation">:</span> <span class="function">assert</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="module">Ariel1</span><span class="punctuation">.</span><span class="function">average</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="punctuation">[</span><span class="number">5</span><span class="punctuation">,</span> <span class="number">6</span><span class="punctuation">,</span> <span class="number">1</span><span class="punctuation">,</span> <span class="number">6</span><span class="punctuation">,</span> <span class="number">0</span><span class="punctuation">,</span> <span class="number">1</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">]</span><span class="punctuation">)</span> <span class="operator">==</span> <span class="number">3</span><span class="punctuation">)</span>
+
+    <span class="comment"># @tag :optional</span>
+    <span class="variable">test</span> <span class="string">"float list"</span><span class="punctuation">,</span>
+      <span class="reserved-word">do</span><span class="punctuation">:</span> <span class="function">assert</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="module">Ariel1</span><span class="punctuation">.</span><span class="function">average</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="punctuation">[</span><span class="number">1.7</span><span class="punctuation">,</span> <span class="number">4.5</span><span class="punctuation">,</span> <span class="number">0</span><span class="punctuation">,</span> <span class="number">2.0</span><span class="punctuation">,</span> <span class="number">3.4</span><span class="punctuation">,</span> <span class="number">5</span><span class="punctuation">,</span> <span class="number">2.5</span><span class="punctuation">,</span> <span class="number">2.2</span><span class="punctuation">,</span> <span class="number">1.2</span><span class="punctuation">]</span><span class="punctuation">)</span> <span class="operator">==</span> <span class="number">2.5</span><span class="punctuation">)</span>
+  <span class="reserved-word">end</span>
+
+  <span class="variable">describe</span> <span class="string">"std_dev:"</span> <span class="reserved-word">do</span>
+     <span class="comment"># @describetag :optional</span>
+    <span class="comment"># @tag :optional</span>
+    <span class="variable">test</span> <span class="string">"empty list"</span><span class="punctuation">,</span>
+      <span class="reserved-word">do</span><span class="punctuation">:</span> <span class="function">assert</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="module">Ariel1</span><span class="punctuation">.</span><span class="function">std_dev</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="punctuation">[</span><span class="punctuation">]</span><span class="punctuation">)</span> <span class="operator">==</span> <span class="number">0</span><span class="punctuation">)</span>
+
+    <span class="comment"># @tag :optional</span>
+    <span class="variable">test</span> <span class="string">"list 1"</span><span class="punctuation">,</span>
+      <span class="reserved-word">do</span><span class="punctuation">:</span> <span class="function">assert</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="module">Ariel1</span><span class="punctuation">.</span><span class="function">std_dev</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="punctuation">[</span><span class="number">4</span><span class="punctuation">,</span> <span class="number">8</span><span class="punctuation">,</span> <span class="number">15</span><span class="punctuation">,</span> <span class="number">16</span><span class="punctuation">,</span> <span class="number">23</span><span class="punctuation">,</span> <span class="number">42</span><span class="punctuation">]</span><span class="punctuation">)</span> <span class="operator">==</span> <span class="number">12.315302134607444</span><span class="punctuation">)</span>
+
+    <span class="comment"># @tag :optional</span>
+    <span class="variable">test</span> <span class="string">"list 2"</span><span class="punctuation">,</span>
+      <span class="reserved-word">do</span><span class="punctuation">:</span> <span class="function">assert</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="module">Ariel1</span><span class="punctuation">.</span><span class="function">std_dev</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="punctuation">[</span><span class="number">110</span><span class="punctuation">,</span> <span class="number">105</span><span class="punctuation">,</span> <span class="number">90</span><span class="punctuation">,</span> <span class="number">100</span><span class="punctuation">,</span> <span class="number">95</span><span class="punctuation">]</span><span class="punctuation">)</span> <span class="operator">==</span> <span class="number">7.0710678118654755</span><span class="punctuation">)</span>
+
+    <span class="comment"># @tag :optional</span>
+    <span class="variable">test</span> <span class="string">"list 3"</span><span class="punctuation">,</span>
+      <span class="reserved-word">do</span><span class="punctuation">:</span>
+        <span class="function">assert</span><span class="punctuation">(</span><span class="punctuation">(</span>
+          <span class="module">Ariel1</span><span class="punctuation">.</span><span class="function">std_dev</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="punctuation">[</span><span class="number">9</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">,</span> <span class="number">5</span><span class="punctuation">,</span> <span class="number">4</span><span class="punctuation">,</span> <span class="number">12</span><span class="punctuation">,</span> <span class="number">7</span><span class="punctuation">,</span> <span class="number">8</span><span class="punctuation">,</span> <span class="number">11</span><span class="punctuation">,</span> <span class="number">9</span><span class="punctuation">,</span> <span class="number">3</span><span class="punctuation">,</span> <span class="number">7</span><span class="punctuation">,</span> <span class="number">4</span><span class="punctuation">,</span> <span class="number">12</span><span class="punctuation">,</span> <span class="number">5</span><span class="punctuation">,</span> <span class="number">4</span><span class="punctuation">,</span> <span class="number">10</span><span class="punctuation">,</span> <span class="number">9</span><span class="punctuation">,</span> <span class="number">6</span><span class="punctuation">,</span> <span class="number">9</span><span class="punctuation">,</span> <span class="number">4</span><span class="punctuation">]</span><span class="punctuation">)</span> <span class="operator">==</span>
+            <span class="number">2.9832867780352594</span>
+        <span class="punctuation">)</span>
+  <span class="reserved-word">end</span>
+
+  <span class="variable">describe</span> <span class="string">"replic:"</span> <span class="reserved-word">do</span>
+     <span class="comment"># @describetag :optional</span>
+    <span class="comment"># @tag :optional</span>
+    <span class="variable">test</span> <span class="string">"empty list"</span><span class="punctuation">,</span>
+      <span class="reserved-word">do</span><span class="punctuation">:</span> <span class="function">assert</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="module">Ariel1</span><span class="punctuation">.</span><span class="function">replic</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="number">7</span><span class="punctuation">,</span> <span class="punctuation">[</span><span class="punctuation">]</span><span class="punctuation">)</span> <span class="operator">==</span> <span class="punctuation">[</span><span class="punctuation">]</span><span class="punctuation">)</span>
+
+    <span class="comment"># @tag :optional</span>
+    <span class="variable">test</span> <span class="string">"repeat 0 times"</span><span class="punctuation">,</span>
+      <span class="reserved-word">do</span><span class="punctuation">:</span> <span class="function">assert</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="module">Ariel1</span><span class="punctuation">.</span><span class="function">replic</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="number">0</span><span class="punctuation">,</span> <span class="punctuation">[</span><span class="atom">:a</span><span class="punctuation">,</span> <span class="atom">:b</span><span class="punctuation">,</span> <span class="atom">:c</span><span class="punctuation">]</span><span class="punctuation">)</span> <span class="operator">==</span> <span class="punctuation">[</span><span class="punctuation">]</span><span class="punctuation">)</span>
+
+    <span class="comment"># @tag :optional</span>
+    <span class="variable">test</span> <span class="string">"repeat 3 single item"</span><span class="punctuation">,</span>
+      <span class="reserved-word">do</span><span class="punctuation">:</span> <span class="function">assert</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="module">Ariel1</span><span class="punctuation">.</span><span class="function">replic</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="number">3</span><span class="punctuation">,</span> <span class="punctuation">[</span><span class="atom">:a</span><span class="punctuation">]</span><span class="punctuation">)</span> <span class="operator">==</span> <span class="punctuation">[</span><span class="atom">:a</span><span class="punctuation">,</span> <span class="atom">:a</span><span class="punctuation">,</span> <span class="atom">:a</span><span class="punctuation">]</span><span class="punctuation">)</span>
+
+    <span class="comment"># @tag :optional</span>
+    <span class="variable">test</span> <span class="string">"repeat 4 list"</span><span class="punctuation">,</span>
+      <span class="reserved-word">do</span><span class="punctuation">:</span>
+        <span class="function">assert</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="module">Ariel1</span><span class="punctuation">.</span><span class="function">replic</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="number">4</span><span class="punctuation">,</span> <span class="punctuation">[</span><span class="number">1</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">,</span> <span class="number">3</span><span class="punctuation">,</span> <span class="number">4</span><span class="punctuation">]</span><span class="punctuation">)</span> <span class="operator">==</span> <span class="punctuation">[</span><span class="number">1</span><span class="punctuation">,</span> <span class="number">1</span><span class="punctuation">,</span> <span class="number">1</span><span class="punctuation">,</span> <span class="number">1</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">,</span> <span class="number">3</span><span class="punctuation">,</span> <span class="number">3</span><span class="punctuation">,</span> <span class="number">3</span><span class="punctuation">,</span> <span class="number">3</span><span class="punctuation">,</span> <span class="number">4</span><span class="punctuation">,</span> <span class="number">4</span><span class="punctuation">,</span> <span class="number">4</span><span class="punctuation">,</span> <span class="number">4</span><span class="punctuation">]</span><span class="punctuation">)</span>
+  <span class="reserved-word">end</span>
+
+  <span class="variable">describe</span> <span class="string">"expand:"</span> <span class="reserved-word">do</span>
+     <span class="comment"># @describetag :optional</span>
+    <span class="comment"># @tag :optional</span>
+    <span class="variable">test</span> <span class="string">"empty list"</span><span class="punctuation">,</span>
+      <span class="reserved-word">do</span><span class="punctuation">:</span> <span class="function">assert</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="module">Ariel1</span><span class="punctuation">.</span><span class="function">expand</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="punctuation">[</span><span class="punctuation">]</span><span class="punctuation">)</span> <span class="operator">==</span> <span class="punctuation">[</span><span class="punctuation">]</span><span class="punctuation">)</span>
+
+    <span class="comment"># @tag :optional</span>
+    <span class="variable">test</span> <span class="string">"single item"</span><span class="punctuation">,</span>
+      <span class="reserved-word">do</span><span class="punctuation">:</span> <span class="function">assert</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="module">Ariel1</span><span class="punctuation">.</span><span class="function">expand</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="punctuation">[</span><span class="atom">:a</span><span class="punctuation">]</span><span class="punctuation">)</span> <span class="operator">==</span> <span class="punctuation">[</span><span class="atom">:a</span><span class="punctuation">]</span><span class="punctuation">)</span>
+
+    <span class="comment"># @tag :optional</span>
+    <span class="variable">test</span> <span class="string">"integer list"</span><span class="punctuation">,</span>
+      <span class="reserved-word">do</span><span class="punctuation">:</span> <span class="function">assert</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="module">Ariel1</span><span class="punctuation">.</span><span class="function">expand</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="punctuation">[</span><span class="number">1</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">,</span> <span class="number">3</span><span class="punctuation">,</span> <span class="number">4</span><span class="punctuation">]</span><span class="punctuation">)</span> <span class="operator">==</span> <span class="punctuation">[</span><span class="number">1</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">,</span> <span class="number">3</span><span class="punctuation">,</span> <span class="number">3</span><span class="punctuation">,</span> <span class="number">3</span><span class="punctuation">,</span> <span class="number">4</span><span class="punctuation">,</span> <span class="number">4</span><span class="punctuation">,</span> <span class="number">4</span><span class="punctuation">,</span> <span class="number">4</span><span class="punctuation">]</span><span class="punctuation">)</span>
+
+    <span class="comment"># @tag :optional</span>
+    <span class="variable">test</span> <span class="string">"atom list"</span><span class="punctuation">,</span>
+      <span class="reserved-word">do</span><span class="punctuation">:</span>
+        <span class="function">assert</span><span class="punctuation">(</span><span class="punctuation">(</span>
+          <span class="module">Ariel1</span><span class="punctuation">.</span><span class="function">expand</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="punctuation">[</span><span class="atom">:a</span><span class="punctuation">,</span> <span class="atom">:b</span><span class="punctuation">,</span> <span class="atom">:c</span><span class="punctuation">,</span> <span class="atom">:d</span><span class="punctuation">,</span> <span class="atom">:e</span><span class="punctuation">]</span><span class="punctuation">)</span> <span class="operator">==</span> <span class="punctuation">[</span>
+            <span class="atom">:a</span><span class="punctuation">,</span>
+            <span class="atom">:b</span><span class="punctuation">,</span>
+            <span class="atom">:b</span><span class="punctuation">,</span>
+            <span class="atom">:c</span><span class="punctuation">,</span>
+            <span class="atom">:c</span><span class="punctuation">,</span>
+            <span class="atom">:c</span><span class="punctuation">,</span>
+            <span class="atom">:d</span><span class="punctuation">,</span>
+            <span class="atom">:d</span><span class="punctuation">,</span>
+            <span class="atom">:d</span><span class="punctuation">,</span>
+            <span class="atom">:d</span><span class="punctuation">,</span>
+            <span class="atom">:e</span><span class="punctuation">,</span>
+            <span class="atom">:e</span><span class="punctuation">,</span>
+            <span class="atom">:e</span><span class="punctuation">,</span>
+            <span class="atom">:e</span><span class="punctuation">,</span>
+            <span class="atom">:e</span>
+          <span class="punctuation">]</span>
+        <span class="punctuation">)</span>
+  <span class="reserved-word">end</span>
+
+  <span class="variable">describe</span> <span class="string">"binary:"</span> <span class="reserved-word">do</span>
+     <span class="comment"># @describetag :optional</span>
+    <span class="comment"># @tag :optional</span>
+    <span class="variable">test</span> <span class="string">"zero"</span><span class="punctuation">,</span>
+      <span class="reserved-word">do</span><span class="punctuation">:</span> <span class="function">assert</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="module">Ariel1</span><span class="punctuation">.</span><span class="function">binary</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="number">0</span><span class="punctuation">)</span> <span class="operator">==</span> <span class="punctuation">[</span><span class="punctuation">]</span><span class="punctuation">)</span>
+
+    <span class="comment"># @tag :optional</span>
+    <span class="variable">test</span> <span class="string">"30"</span><span class="punctuation">,</span>
+      <span class="reserved-word">do</span><span class="punctuation">:</span> <span class="function">assert</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="module">Ariel1</span><span class="punctuation">.</span><span class="function">binary</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="number">30</span><span class="punctuation">)</span> <span class="operator">==</span> <span class="punctuation">[</span><span class="number">1</span><span class="punctuation">,</span> <span class="number">1</span><span class="punctuation">,</span> <span class="number">1</span><span class="punctuation">,</span> <span class="number">1</span><span class="punctuation">,</span> <span class="number">0</span><span class="punctuation">]</span><span class="punctuation">)</span>
+
+    <span class="comment"># @tag :optional</span>
+    <span class="variable">test</span> <span class="string">"45123"</span><span class="punctuation">,</span>
+      <span class="reserved-word">do</span><span class="punctuation">:</span> <span class="function">assert</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="module">Ariel1</span><span class="punctuation">.</span><span class="function">binary</span><span class="punctuation">(</span><span class="punctuation">(</span><span class="number">45123</span><span class="punctuation">)</span> <span class="operator">==</span> <span class="punctuation">[</span><span class="number">1</span><span class="punctuation">,</span> <span class="number">0</span><span class="punctuation">,</span> <span class="number">1</span><span class="punctuation">,</span> <span class="number">1</span><span class="punctuation">,</span> <span class="number">0</span><span class="punctuation">,</span> <span class="number">0</span><span class="punctuation">,</span> <span class="number">0</span><span class="punctuation">,</span> <span class="number">0</span><span class="punctuation">,</span> <span class="number">0</span><span class="punctuation">,</span> <span class="number">1</span><span class="punctuation">,</span> <span class="number">0</span><span class="punctuation">,</span> <span class="number">0</span><span class="punctuation">,</span> <span class="number">0</span><span class="punctuation">,</span> <span class="number">0</span><span class="punctuation">,</span> <span class="number">1</span><span class="punctuation">,</span> <span class="number">1</span><span class="punctuation">]</span><span class="punctuation">)</span>
+  <span class="reserved-word">end</span>
+<span class="reserved-word">end</span>
+    </pre>
+  </body>
+</html>
